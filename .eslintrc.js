@@ -39,6 +39,8 @@ module.exports = {
         'no-use-before-define': 'off',
         'react/prop-types': 'off',
         'react-hooks/exhaustive-deps': 'warn',
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off",
         'react/jsx-filename-extension': [
             1,
             {
