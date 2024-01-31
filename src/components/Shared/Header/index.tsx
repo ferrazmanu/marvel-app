@@ -4,7 +4,7 @@ const links = [
     {
         id: 0,
         link: '/',
-        title: 'Início',
+        title: 'Inicio',
     },
     {
         id: 1,

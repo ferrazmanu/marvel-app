@@ -15,7 +15,8 @@ export const Header = styled.header`
 
         li {
             text-transform: uppercase;
-            font-size: ${({ theme }) => theme.fontSizes.small_12};
+            font-size: ${({ theme }) => theme.fontSizes.small_18};
+            font-family: ${({ theme }) => theme.fonts.primary};
 
             a {
                 transform: perspective(1px) translateZ(0);
@@ -23,7 +24,6 @@ export const Header = styled.header`
                 position: relative;
                 overflow: hidden;
                 color: ${({ theme }) => theme.colors.white};
-                font-weight: 500;
 
                 &::before {
                     content: '';

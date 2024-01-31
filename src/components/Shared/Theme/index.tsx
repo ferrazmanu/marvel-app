@@ -28,7 +28,8 @@ const theme: DefaultTheme = {
         _60: 'clamp(1.875rem, 3.13vw, 3.75rem)',
     },
     fonts: {
-        primary_regular: 'Marvel',
+        primary: 'Marvel',
+        secondary: 'Roboto',
     },
 };
 

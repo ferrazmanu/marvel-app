@@ -1,5 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
+import TTF from '../assets/fonts/Marvel-Regular.ttf';
+import WOFF from '../assets/fonts/Marvel-Regular.woff';
+import WOFF2 from '../assets/fonts/Marvel-Regular.woff2';
+
 const GlobalStyle = createGlobalStyle`
     html{
       height: 100%;
@@ -26,11 +30,15 @@ const GlobalStyle = createGlobalStyle`
     list-style: none;
    }
 
+   h1, h2, h3, h4, h5, h6{
+    font-family: ${({ theme }) => theme.fonts.primary};
+    text-transform: uppercase;
+    font-weight: 400;
+   }
+
   body {
     margin: 0;
-    font-family: ${({ theme }) => theme.fonts.primary_regular}, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    font-family: ${({ theme }) => theme.fonts.secondary};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(0deg, rgba(9,5,36,1) 0%, rgba(12,11,19,1) 100%);
@@ -41,11 +49,6 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-
   .error{
     font-size: ${({ theme }) => theme.fontSizes.small_12};
     color:red;
@@ -53,12 +56,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   @font-face {
-    font-family: Marvel;
-    src: url('/assets/fonts/Marvel-Regular.ttf') format('truetype');
-    font-weight: 400;
+    font-family: 'Marvel';
+    src: url(${TTF}) format('truetype'), url(${WOFF2}) format('woff2'), url(${WOFF}) format('woff');
+    font-weight: normal;
+    font-style: normal;
     font-display: swap;
-  }
-
+}
 `;
 
 export default GlobalStyle;

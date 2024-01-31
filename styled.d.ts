@@ -28,5 +28,9 @@ declare module 'styled-components' {
             _30: string;
             _60: string;
         };
+        fonts: {
+            primary: string;
+            secondary: string;
+        };
     }
 }

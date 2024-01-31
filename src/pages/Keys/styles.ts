@@ -46,8 +46,9 @@ export const FormContainer = styled.div`
         gap: 8px;
 
         label {
+            font-family: ${({ theme }) => theme.fonts.primary};
             font-size: ${({ theme }) => theme.fontSizes.medium_24};
-            font-weight: 500;
+            text-transform: uppercase;
         }
 
         .input-wrapper {
@@ -63,7 +64,6 @@ export const FormContainer = styled.div`
             color: ${({ theme }) => theme.colors.white};
             width: 100%;
             font-size: ${({ theme }) => theme.fontSizes.small_18};
-            font-weight: 400;
         }
     }
 `;
