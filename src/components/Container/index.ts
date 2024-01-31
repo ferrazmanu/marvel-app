@@ -36,7 +36,7 @@ const fullgradient = css`
     }
 `;
 
-export const Container = styled.div<Props>`
+export const Container = styled.section<Props>`
     max-width: 80dvw;
     width: 100%;
     margin: 0 auto;
@@ -45,10 +45,11 @@ export const Container = styled.div<Props>`
     ${(props) => props.center && 'justify-content:center'};
     gap: ${({ theme }) => theme.spacing._30};
     padding: 2dvh 15px;
-    height: ${(props) => (props.fullheight ? '100%' : 'auto')};
+    height: ${(props) => props.fullheight && '100%'};
+    min-height: ${(props) => props.fullheight && 'inherit'};
 `;
 
-export const FullContainer = styled.div<Props>`
+export const FullContainer = styled.section<Props>`
     max-width: 100dvw;
     width: 100%;
     height: 100%;

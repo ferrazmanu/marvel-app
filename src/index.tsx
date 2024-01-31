@@ -15,6 +15,7 @@ import GlobalStyle from './styles/global';
 import { Header } from './components/Header';
 import Theme from './components/Theme';
 import NotFound from './pages/NotFound';
+import { Footer } from './components/Footer';
 
 const router = createBrowserRouter([
     {
@@ -60,6 +61,8 @@ root.render(
                 {!isMainPage && <Header />}
 
                 <RouterProvider router={router} />
+
+                <Footer />
             </Theme>
         </Provider>
     </React.StrictMode>

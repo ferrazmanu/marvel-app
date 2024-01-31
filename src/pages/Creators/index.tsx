@@ -8,6 +8,7 @@ import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
 import { Loading } from '../../components/Loading';
 import { Paginate } from '../../components/Paginate';
+import { MainWrapper } from '../../components/MainWrapper';
 
 const fetchCreators = async (
     dispatch: Dispatch<UnknownAction>,
@@ -48,31 +49,41 @@ const Creators: React.FC = () => {
     useEffect(() => {
         if (!AuthenticateUser()) return;
         setLoading(true);
-        fetchCreators(dispatch, 1).then(() => setLoading(false));
+        fetchCreators(dispatch, 0).then(() => setLoading(false));
     }, [dispatch]);
 
     return (
-        <Container>
-            <h2>Criadores</h2>
+        <MainWrapper>
+            <Container fullheight>
+                <h2>Criadores</h2>
 
-            <div>
                 {loading ? (
                     <Loading />
                 ) : (
-                    <ul>
+                    <div className="grid">
                         {creators?.results.length > 0 ? (
                             creators.results.map((item) => {
-                                return <li key={item.id}>{item.fullName}</li>;
+                                return (
+                                    <div className="item" key={item.id}>
+                                        <p>{item.fullName}</p>
+                                        <img
+                                            src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                                        />
+                                    </div>
+                                );
                             })
                         ) : (
                             <p>Nenhum resultado.</p>
                         )}
-                    </ul>
+                    </div>
                 )}
-            </div>
 
-            <Paginate onPageChange={handlePageClick} pageCount={pageCount} />
-        </Container>
+                <Paginate
+                    onPageChange={handlePageClick}
+                    pageCount={pageCount}
+                />
+            </Container>
+        </MainWrapper>
     );
 };
 

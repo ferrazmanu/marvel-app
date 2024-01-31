@@ -6,7 +6,7 @@ import WOFF2 from '../assets/fonts/Marvel-Regular.woff2';
 
 const GlobalStyle = createGlobalStyle`
     html{
-      height: 100%;
+          min-height: 100dvh;
     }
 
    *{
@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
 
    #root{
        margin:0 auto;
-       height: 100%;
+           min-height: 100dvh;
    }
 
    a{
@@ -46,7 +46,7 @@ const GlobalStyle = createGlobalStyle`
     background-size: cover;
     background-position: center center;
     color: ${({ theme }) => theme.colors.white};
-    height: 100%;
+    min-height: 100dvh;
   }
 
   .error{

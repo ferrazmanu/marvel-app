@@ -21,6 +21,10 @@ export interface CharactersProps {
 export interface CharacterProps {
     name: string;
     id: string | number;
+    thumbnail: {
+        path: string;
+        extension: string;
+    };
 }
 
 export interface ComicsProps {
@@ -33,6 +37,10 @@ export interface ComicsProps {
 export interface ComicProps {
     id: string | number;
     title: string;
+    thumbnail: {
+        path: string;
+        extension: string;
+    };
 }
 
 export interface CreatorsProps {
@@ -45,6 +53,10 @@ export interface CreatorsProps {
 export interface CreatorProps {
     id: string | number;
     fullName: string;
+    thumbnail: {
+        path: string;
+        extension: string;
+    };
 }
 
 export interface InputsProps {

@@ -1,6 +1,6 @@
 import { Wrapper } from './styles';
 
-export const Loading = ({ color = '#fff', size = '64px' }) => {
+export const Loading = ({ color = '#fff', size = '54px' }) => {
     return (
         <Wrapper>
             <svg
@@ -10,13 +10,6 @@ export const Loading = ({ color = '#fff', size = '64px' }) => {
                 viewBox="0 0 128 128"
                 xmlSpace="preserve"
             >
-                <rect
-                    x="0"
-                    y="0"
-                    width="100%"
-                    height="100%"
-                    fill="transparent"
-                />
                 <circle cx="64.13" cy="64.13" r="27.63" fill={color} />
                 <path
                     d="M64.13 18.5A45.63 45.63 0 1 1 18.5 64.13 45.63 45.63 0 0 1 64.13 18.5zm0 7.85a37.78 37.78 0 1 1-37.78 37.78 37.78 37.78 0 0 1 37.78-37.78z"

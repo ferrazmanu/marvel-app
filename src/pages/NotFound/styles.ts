@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NotFoundContainer = styled.div`
+export const Wrapper = styled.div`
     height: 100%;
 
     p {
@@ -12,7 +12,7 @@ export const NotFoundContainer = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 30px;
+        gap: ${({ theme }) => theme.spacing._30};
         padding: 3dvw;
         max-width: 60%;
         width: 100%;

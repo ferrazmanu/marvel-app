@@ -13,7 +13,7 @@ export const Paginate = ({ onPageChange, pageCount }: Props) => {
                 breakLabel="..."
                 nextLabel=">"
                 onPageChange={onPageChange}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={2}
                 pageCount={pageCount}
                 previousLabel="<"
                 renderOnZeroPageCount={null}

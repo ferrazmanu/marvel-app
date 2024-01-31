@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FormContainer = styled.div`
+export const Wrapper = styled.div`
     height: 100%;
 
     .title {
@@ -22,7 +22,7 @@ export const FormContainer = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        gap: 30px;
+        gap: ${({ theme }) => theme.spacing._30};
         padding: 3dvw;
         border: 1px solid #fff;
         border-radius: 15px;
@@ -37,7 +37,7 @@ export const FormContainer = styled.div`
     .form-content {
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        gap: ${({ theme }) => theme.spacing._30};
     }
 
     .input-box {

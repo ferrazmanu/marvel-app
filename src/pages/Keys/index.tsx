@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { setKeys } from '../../redux/actions';
 import { InputsProps } from '../../types/types';
 import { FullContainer } from '../../components/Container';
-import { FormContainer } from './styles';
+import { Wrapper } from './styles';
 import { Button } from '../../components/Button';
 
 import img from '../../assets/images/3.jpg';
@@ -46,7 +46,7 @@ const Keys: React.FC = () => {
     ];
 
     return (
-        <FormContainer>
+        <Wrapper>
             <FullContainer fullgradient={true}>
                 <img src={img} loading="eager" />
 
@@ -92,7 +92,7 @@ const Keys: React.FC = () => {
                     />
                 </form>
             </FullContainer>
-        </FormContainer>
+        </Wrapper>
     );
 };
 

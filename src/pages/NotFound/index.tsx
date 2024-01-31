@@ -1,5 +1,5 @@
 import { Container, FullContainer } from '../../components/Container';
-import { NotFoundContainer } from './styles';
+import { Wrapper } from './styles';
 import { useRouteError } from 'react-router-dom';
 
 import img from '../../assets/images/5.jpg';
@@ -10,7 +10,7 @@ const NotFound: React.FC = () => {
     console.error(error);
 
     return (
-        <NotFoundContainer>
+        <Wrapper>
             <FullContainer fullgradient={true}>
                 <img src={img} loading="eager" />
 
@@ -38,7 +38,7 @@ const NotFound: React.FC = () => {
                     </div>
                 </Container>
             </FullContainer>
-        </NotFoundContainer>
+        </Wrapper>
     );
 };
 
