@@ -1,12 +1,15 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { setCookie } from '../../utils/cookies';
+import { getCookie, setCookie } from '../../utils/cookies';
 import { InputsProps } from '../../types/types';
 import { FullContainer } from '../../components/Container';
 import { Wrapper } from './styles';
 import { Button } from '../../components/Button';
+import { useNavigate } from 'react-router-dom';
 
 import img from '../../assets/images/3.jpg';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '../../redux/selectors';
 
 const Keys: React.FC = () => {
     const {
@@ -14,7 +17,15 @@ const Keys: React.FC = () => {
         handleSubmit,
         formState: { errors, isSubmitting },
         reset,
-    } = useForm<InputsProps>();
+    } = useForm<InputsProps>({
+        defaultValues: {
+            publicKey: getCookie('publicKey') || '',
+            privateKey: getCookie('privateKey') || '',
+        },
+    });
+
+    const isUserAuth = useSelector(selectAuth);
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<InputsProps> = (data) => {
         setCookie('publicKey', data.publicKey, { expires: 7 });
@@ -79,11 +90,20 @@ const Keys: React.FC = () => {
                         })}
                     </div>
 
-                    <Button
-                        loading={isSubmitting}
-                        type="submit"
-                        text="Enviar"
-                    />
+                    <div className="buttons">
+                        <Button
+                            loading={isSubmitting}
+                            type="submit"
+                            text={isUserAuth ? 'Alterar' : 'Enviar'}
+                        />
+                        {isUserAuth && (
+                            <Button
+                                text="Voltar"
+                                type="button"
+                                onClick={() => navigate(-1)}
+                            />
+                        )}
+                    </div>
                 </form>
             </FullContainer>
         </Wrapper>

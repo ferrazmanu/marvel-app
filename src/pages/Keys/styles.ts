@@ -66,4 +66,10 @@ export const Wrapper = styled.div`
             font-size: ${({ theme }) => theme.fontSizes.small_18};
         }
     }
+
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 `;

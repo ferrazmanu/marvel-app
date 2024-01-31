@@ -1,3 +1,4 @@
+import { getCookie } from '../utils/cookies';
 import {
     SET_AUTH,
     SET_CHARACTERS,
@@ -6,8 +7,11 @@ import {
 } from './constants';
 import { RootState } from '../types/types';
 
+const publicKey = getCookie('publicKey');
+const privateKey = getCookie('privateKey');
+
 const initialState: RootState = {
-    auth: false,
+    auth: !!(publicKey && privateKey),
     characters: {
         count: 20,
         limit: 20,

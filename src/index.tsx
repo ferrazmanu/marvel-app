@@ -50,7 +50,7 @@ const root = ReactDOM.createRoot(
 );
 
 const mainPages = ['/', '/characters', '/comics', '/creators'];
-const isMainPage = !mainPages.includes(window.location.pathname);
+const isMainPage = mainPages.includes(window.location.pathname);
 
 root.render(
     <React.StrictMode>
@@ -58,7 +58,7 @@ root.render(
             <Theme>
                 <GlobalStyle />
 
-                {!isMainPage && <Header />}
+                {isMainPage && <Header />}
 
                 <RouterProvider router={router} />
 
