@@ -86,8 +86,8 @@ const Keys: React.FC = () => {
                     </div>
 
                     <Button
-                        type="submit"
                         loading={isSubmitting}
+                        type="submit"
                         text="Enviar"
                     />
                 </form>

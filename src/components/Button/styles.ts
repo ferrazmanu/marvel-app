@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Button = styled.button`
+interface Props {
+    maxWidth?: string;
+}
+
+export const Button = styled.button<Props>`
     background-color: ${({ theme }) => theme.colors.tertiary};
     appearance: none;
     border: 2px solid ${({ theme }) => theme.colors.white};
@@ -12,4 +16,7 @@ export const Button = styled.button`
     font-weight: 600;
     cursor: pointer;
     padding: 6px 8px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: ${(props) => props.maxWidth};
 `;

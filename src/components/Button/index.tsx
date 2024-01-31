@@ -6,13 +6,19 @@ interface Props {
     text?: string;
     type?: 'button' | 'submit' | 'reset';
     onClick?: () => void;
+    maxWidth?: string;
 }
 
-export const Button = ({ loading, text, type, onClick }: Props) => {
+export const Button = ({ loading, text, type, onClick, maxWidth }: Props) => {
     console.log(loading);
 
     return (
-        <S.Button type={type} onClick={onClick}>
+        <S.Button
+            type={type}
+            onClick={onClick}
+            disabled={loading}
+            maxWidth={maxWidth}
+        >
             {loading ? <Loading size="24px" /> : text}
         </S.Button>
     );

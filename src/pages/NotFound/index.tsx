@@ -30,6 +30,7 @@ const NotFound: React.FC = () => {
                         </p>
 
                         <Button
+                            maxWidth="300px"
                             text="Voltar à tela inicial"
                             type="button"
                             onClick={() => (window.location.href = '/')}
