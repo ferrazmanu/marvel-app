@@ -25,7 +25,7 @@ npm install
 ## **Configuração**
 
 1. Crie uma conta na [Marvel Developer Portal](https://developer.marvel.com/account) para obter suas chaves de API pública e privada.
-2. Ao rodar o projeto ou acessar no link disponibilizado, adicione suas chaves de API onde foi requisitado.
+2. Ao rodar o projeto ou acessar no [link](https://marvel-app-pl.vercel.app/), adicione suas chaves de API onde foi requisitado.
 
 ## **Uso**
 
