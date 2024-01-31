@@ -1,55 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { AuthenticateUser } from '../../utils/authUser';
-import { ComicsProps } from './types';
 import http from '../../service/config';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCreators } from '../../redux/actions';
+import { selectComics } from '../../redux/selectors';
+import { UnknownAction } from 'redux';
+import { Container } from '../../components/Container';
+
+const fetchComics = async (dispatch: Dispatch<UnknownAction>) => {
+    try {
+        const response = await http.get('comics');
+
+        if (response.status !== 200) {
+            throw new Error('Network response was not ok');
+        }
+        dispatch(setCreators(response.data.data.results));
+    } catch (e) {
+        console.error(e);
+    }
+};
 
 const Comics: React.FC = () => {
-    const [dataList, setDataList] = useState<ComicsProps[]>([]);
     const [loading, setLoading] = useState(true);
-
-    const fetchComics = async () => {
-        setLoading(true);
-        try {
-            const response = await http.get('comics');
-
-            if (response.status !== 200) {
-                throw new Error('Network response was not ok');
-            }
-            setDataList(response.data.data.results);
-        } catch (e) {
-            console.log(e);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const dispatch = useDispatch();
+    const comics = useSelector(selectComics);
 
     useEffect(() => {
-        if (AuthenticateUser()) {
-            fetchComics();
-        }
-    }, []);
+        if (!AuthenticateUser()) return;
+        setLoading(true);
+        fetchComics(dispatch).then(() => setLoading(false));
+    }, [dispatch]);
 
     return (
-        <>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="/">Início</a>
-                    </li>
-                    <li>
-                        <a href="/characters">Personagens</a>
-                    </li>
-                    <li>
-                        <a href="/comics">Quadrinhos</a>
-                    </li>
-                    <li>
-                        <a href="/creators">Criadores</a>
-                    </li>
-                    <li>
-                        <a href="/keys">Suas Chaves</a>
-                    </li>
-                </ul>
-            </nav>
+        <Container>
             <h2>Quadrinhos</h2>
 
             <div>
@@ -57,8 +40,8 @@ const Comics: React.FC = () => {
                     <p>Carregando</p>
                 ) : (
                     <ul>
-                        {dataList?.length > 0 ? (
-                            dataList.map((data) => {
+                        {comics?.length > 0 ? (
+                            comics.map((data) => {
                                 return <li key={data.id}>{data.title}</li>;
                             })
                         ) : (
@@ -67,7 +50,7 @@ const Comics: React.FC = () => {
                     </ul>
                 )}
             </div>
-        </>
+        </Container>
     );
 };
 

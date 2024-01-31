@@ -1,11 +1,6 @@
 import { legacy_createStore as createStore } from 'redux';
-import { combineReducers } from 'redux';
-import { keysReducer } from './reducers';
+import { reducer } from './reducers';
 
-const rootReducer = combineReducers({
-    keys: keysReducer,
-});
-
-const store = createStore(rootReducer);
+const store = createStore(reducer);
 
 export default store;

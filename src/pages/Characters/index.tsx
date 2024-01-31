@@ -1,54 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { AuthenticateUser } from '../../utils/authUser';
 import http from '../../service/config';
-import { CharactersProps } from './types';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCharacters } from '../../redux/actions';
+import { selectCharacters } from '../../redux/selectors';
+import { UnknownAction } from 'redux';
+import { Container } from '../../components/Container';
+
+const fetchCharacters = async (dispatch: Dispatch<UnknownAction>) => {
+    try {
+        const response = await http.get('characters');
+
+        if (response.status !== 200) {
+            throw new Error('Network response was not ok');
+        }
+        dispatch(setCharacters(response.data.data.results));
+    } catch (e) {
+        console.error(e);
+    }
+};
 
 const Characters: React.FC = () => {
-    const [dataList, setDataList] = useState<CharactersProps[]>([]);
     const [loading, setLoading] = useState(true);
-
-    const fetchCharacters = async () => {
-        setLoading(true);
-        try {
-            const response = await http.get('characters');
-
-            if (response.status !== 200) {
-                throw new Error('Network response was not ok');
-            }
-            setDataList(response.data.data.results);
-        } catch (e) {
-            console.log(e);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const dispatch = useDispatch();
+    const characters = useSelector(selectCharacters);
 
     useEffect(() => {
-        if (AuthenticateUser()) {
-            fetchCharacters();
-        }
-    }, []);
+        if (!AuthenticateUser()) return;
+        setLoading(true);
+        fetchCharacters(dispatch).then(() => setLoading(false));
+    }, [dispatch]);
+
     return (
-        <>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="/">Início</a>
-                    </li>
-                    <li>
-                        <a href="/characters">Personagens</a>
-                    </li>
-                    <li>
-                        <a href="/comics">Quadrinhos</a>
-                    </li>
-                    <li>
-                        <a href="/creators">Criadores</a>
-                    </li>
-                    <li>
-                        <a href="/keys">Suas Chaves</a>
-                    </li>
-                </ul>
-            </nav>
+        <Container>
             <h2>Personagens</h2>
 
             <div>
@@ -56,8 +40,8 @@ const Characters: React.FC = () => {
                     <p>Carregando</p>
                 ) : (
                     <ul>
-                        {dataList?.length > 0 ? (
-                            dataList.map((data) => {
+                        {characters?.length > 0 ? (
+                            characters.map((data) => {
                                 return <li key={data.id}>{data.name}</li>;
                             })
                         ) : (
@@ -66,7 +50,7 @@ const Characters: React.FC = () => {
                     </ul>
                 )}
             </div>
-        </>
+        </Container>
     );
 };
 

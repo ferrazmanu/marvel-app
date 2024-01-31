@@ -34,6 +34,10 @@ module.exports = {
     ],
     rules: {
         semi: ['error', 'always'],
+        "sort-imports": ["error", {
+            "ignoreCase": true,
+            "ignoreDeclarationSort": true,
+        }],
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         'react/jsx-one-expression-per-line': 'off',
         'no-use-before-define': 'off',

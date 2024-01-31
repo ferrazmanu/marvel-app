@@ -1,9 +1,10 @@
 import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { setCookie } from '../../utils/cookies';
 import { useDispatch } from 'react-redux';
 import { setKeys } from '../../redux/actions';
-import { InputsProps } from './types';
+import { InputsProps } from '../../types/types';
+import { Container } from '../../components/Container';
 
 const Keys: React.FC = () => {
     const {
@@ -26,22 +27,24 @@ const Keys: React.FC = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <h2>Please insert your marvel api keys</h2>
-            <div>
-                <label>Public Key</label>
-                <input {...register('publicKey', { required: true })} />
-                {errors.publicKey && <span>This field is required</span>}
-            </div>
+        <Container>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <h2>Please insert your marvel api keys</h2>
+                <div>
+                    <label>Public Key</label>
+                    <input {...register('publicKey', { required: true })} />
+                    {errors.publicKey && <span>This field is required</span>}
+                </div>
 
-            <div>
-                <label>Private Key</label>
-                <input {...register('privateKey', { required: true })} />
-                {errors.privateKey && <span>This field is required</span>}
-            </div>
+                <div>
+                    <label>Private Key</label>
+                    <input {...register('privateKey', { required: true })} />
+                    {errors.privateKey && <span>This field is required</span>}
+                </div>
 
-            <input type="submit" />
-        </form>
+                <input type="submit" />
+            </form>
+        </Container>
     );
 };
 

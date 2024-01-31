@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { getCookie } from '../utils/cookies';
 import md5 from 'md5';
+
+import { getCookie } from '../utils/cookies';
 
 const publicKey = getCookie('publicKey');
 const privateKey = getCookie('privateKey');

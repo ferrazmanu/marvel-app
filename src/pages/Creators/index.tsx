@@ -1,55 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { AuthenticateUser } from '../../utils/authUser';
-import { CreatorsProps } from './types';
 import http from '../../service/config';
+import { setCreators } from '../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCreators } from '../../redux/selectors';
+import { UnknownAction } from 'redux';
+import { Container } from '../../components/Container';
+
+const fetchCreators = async (dispatch: Dispatch<UnknownAction>) => {
+    try {
+        const response = await http.get('creators');
+
+        if (response.status !== 200) {
+            throw new Error('Network response was not ok');
+        }
+        dispatch(setCreators(response.data.data.results));
+    } catch (e) {
+        console.error(e);
+    }
+};
 
 const Creators: React.FC = () => {
-    const [dataList, setDataList] = useState<CreatorsProps[]>([]);
     const [loading, setLoading] = useState(true);
-
-    const fetchCharacters = async () => {
-        setLoading(true);
-        try {
-            const response = await http.get('creators');
-
-            if (response.status !== 200) {
-                throw new Error('Network response was not ok');
-            }
-            setDataList(response.data.data.results);
-        } catch (e) {
-            console.log(e);
-        } finally {
-            setLoading(false);
-        }
-    };
+    const dispatch = useDispatch();
+    const creators = useSelector(selectCreators);
 
     useEffect(() => {
-        if (AuthenticateUser()) {
-            fetchCharacters();
-        }
-    }, []);
+        if (!AuthenticateUser()) return;
+        setLoading(true);
+        fetchCreators(dispatch).then(() => setLoading(false));
+    }, [dispatch]);
 
     return (
-        <>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="/">Início</a>
-                    </li>
-                    <li>
-                        <a href="/characters">Personagens</a>
-                    </li>
-                    <li>
-                        <a href="/comics">Quadrinhos</a>
-                    </li>
-                    <li>
-                        <a href="/creators">Criadores</a>
-                    </li>
-                    <li>
-                        <a href="/keys">Suas Chaves</a>
-                    </li>
-                </ul>
-            </nav>
+        <Container>
             <h2>Criadores</h2>
 
             <div>
@@ -57,8 +40,8 @@ const Creators: React.FC = () => {
                     <p>Carregando</p>
                 ) : (
                     <ul>
-                        {dataList?.length > 0 ? (
-                            dataList.map((data) => {
+                        {creators?.length > 0 ? (
+                            creators.map((data) => {
                                 return <li key={data.id}>{data.fullName}</li>;
                             })
                         ) : (
@@ -67,7 +50,7 @@ const Creators: React.FC = () => {
                     </ul>
                 )}
             </div>
-        </>
+        </Container>
     );
 };
 
