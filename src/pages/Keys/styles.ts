@@ -24,8 +24,8 @@ export const Wrapper = styled.div`
         justify-content: space-between;
         gap: ${({ theme }) => theme.spacing._30};
         padding: 3dvw;
-        border: 1px solid #fff;
-        border-radius: 15px;
+        border-top: 1px solid ${({ theme }) => theme.colors.white};
+        border-bottom: 1px solid ${({ theme }) => theme.colors.white};
         position: relative;
         height: 100%;
         max-width: 60%;
@@ -52,7 +52,7 @@ export const Wrapper = styled.div`
         }
 
         .input-wrapper {
-            border-bottom: 1px solid #fff;
+            border-bottom: 1px solid ${({ theme }) => theme.colors.white};
             padding: 0 8px;
         }
 

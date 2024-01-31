@@ -10,7 +10,6 @@ export const Button = styled.button<Props>`
     border: 2px solid ${({ theme }) => theme.colors.white};
     height: 45px;
     color: ${({ theme }) => theme.colors.white};
-    border-radius: 10px;
     cursor: pointer;
     padding: 3px 8px;
     width: 100%;
