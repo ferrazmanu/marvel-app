@@ -1,14 +1,14 @@
 import {
+    SET_AUTH,
     SET_CHARACTERS,
     SET_COMICS,
     SET_CREATORS,
-    SET_KEYS,
 } from './constants';
 import { CharactersProps, ComicsProps, CreatorsProps } from '../types/types';
 
-export const setKeys = (publicKey: string, privateKey: string) => ({
-    type: SET_KEYS,
-    payload: { publicKey, privateKey },
+export const setUserAuth = (auth: boolean) => ({
+    type: SET_AUTH,
+    payload: { auth },
 });
 
 export const setCharacters = (characters: CharactersProps) => ({

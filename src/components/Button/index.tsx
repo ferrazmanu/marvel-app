@@ -10,8 +10,6 @@ interface Props {
 }
 
 export const Button = ({ loading, text, type, onClick, maxWidth }: Props) => {
-    console.log(loading);
-
     return (
         <S.Button
             type={type}

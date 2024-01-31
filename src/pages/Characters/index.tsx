@@ -3,7 +3,7 @@ import { AuthenticateUser } from '../../utils/authUser';
 import http from '../../service/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCharacters } from '../../redux/actions';
-import { selectCharacters } from '../../redux/selectors';
+import { selectAuth, selectCharacters } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
 import { Loading } from '../../components/Loading';
@@ -37,6 +37,8 @@ const fetchCharacters = async (
 const Characters: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+
+    const isUserAuth = useSelector(selectAuth);
     const characters = useSelector(selectCharacters);
 
     const pageCount = Math.ceil(characters.total / 20);
@@ -48,10 +50,12 @@ const Characters: React.FC = () => {
     };
 
     useEffect(() => {
-        if (!AuthenticateUser()) return;
-        setLoading(true);
-        fetchCharacters(dispatch, 0).then(() => setLoading(false));
-    }, [dispatch]);
+        AuthenticateUser(dispatch);
+        if (isUserAuth) {
+            setLoading(true);
+            fetchCharacters(dispatch, 0).then(() => setLoading(false));
+        }
+    }, [dispatch, isUserAuth]);
 
     return (
         <MainWrapper>

@@ -1,13 +1,8 @@
 export interface RootState {
-    keys: KeysProps;
+    auth: boolean;
     characters: CharactersProps;
     comics: ComicsProps;
     creators: CreatorsProps;
-}
-
-export interface KeysProps {
-    publicKey: string;
-    privateKey: string;
 }
 
 export interface CharactersProps {

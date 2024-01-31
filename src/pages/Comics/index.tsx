@@ -3,7 +3,7 @@ import { AuthenticateUser } from '../../utils/authUser';
 import http from '../../service/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { setComics } from '../../redux/actions';
-import { selectComics } from '../../redux/selectors';
+import { selectAuth, selectComics } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
 import { Loading } from '../../components/Loading';
@@ -37,6 +37,8 @@ const fetchComics = async (
 const Comics: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+
+    const isUserAuth = useSelector(selectAuth);
     const comics = useSelector(selectComics);
 
     const pageCount = Math.ceil(comics.total / 20);
@@ -48,10 +50,12 @@ const Comics: React.FC = () => {
     };
 
     useEffect(() => {
-        if (!AuthenticateUser()) return;
-        setLoading(true);
-        fetchComics(dispatch, 0).then(() => setLoading(false));
-    }, [dispatch]);
+        AuthenticateUser(dispatch);
+        if (isUserAuth) {
+            setLoading(true);
+            fetchComics(dispatch, 0).then(() => setLoading(false));
+        }
+    }, [dispatch, isUserAuth]);
 
     return (
         <MainWrapper>

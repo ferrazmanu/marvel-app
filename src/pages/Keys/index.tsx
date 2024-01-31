@@ -1,8 +1,6 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { setCookie } from '../../utils/cookies';
-import { useDispatch } from 'react-redux';
-import { setKeys } from '../../redux/actions';
 import { InputsProps } from '../../types/types';
 import { FullContainer } from '../../components/Container';
 import { Wrapper } from './styles';
@@ -18,11 +16,7 @@ const Keys: React.FC = () => {
         reset,
     } = useForm<InputsProps>();
 
-    const dispatch = useDispatch();
-
     const onSubmit: SubmitHandler<InputsProps> = (data) => {
-        dispatch(setKeys(data.publicKey, data.privateKey));
-
         setCookie('publicKey', data.publicKey, { expires: 7 });
         setCookie('privateKey', data.privateKey, { expires: 7 });
 

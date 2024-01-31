@@ -1,20 +1,13 @@
-import { getCookie } from '../utils/cookies';
 import {
+    SET_AUTH,
     SET_CHARACTERS,
     SET_COMICS,
     SET_CREATORS,
-    SET_KEYS,
 } from './constants';
 import { RootState } from '../types/types';
 
-const publicKey = getCookie('publicKey');
-const privateKey = getCookie('privateKey');
-
 const initialState: RootState = {
-    keys: {
-        publicKey: publicKey || '',
-        privateKey: privateKey || '',
-    },
+    auth: false,
     characters: {
         count: 20,
         limit: 20,
@@ -41,13 +34,10 @@ const initialState: RootState = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const reducer = (state = initialState, action: any): RootState => {
     switch (action.type) {
-        case SET_KEYS:
+        case SET_AUTH:
             return {
                 ...state,
-                keys: {
-                    publicKey: action.payload.publicKey,
-                    privateKey: action.payload.privateKey,
-                },
+                auth: action.payload.auth,
             };
         case SET_CHARACTERS:
             return {

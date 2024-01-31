@@ -3,7 +3,7 @@ import { AuthenticateUser } from '../../utils/authUser';
 import http from '../../service/config';
 import { setCreators } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCreators } from '../../redux/selectors';
+import { selectAuth, selectCreators } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
 import { Loading } from '../../components/Loading';
@@ -36,6 +36,8 @@ const fetchCreators = async (
 const Creators: React.FC = () => {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
+
+    const isUserAuth = useSelector(selectAuth);
     const creators = useSelector(selectCreators);
 
     const pageCount = Math.ceil(creators.total / 20);
@@ -47,10 +49,12 @@ const Creators: React.FC = () => {
     };
 
     useEffect(() => {
-        if (!AuthenticateUser()) return;
-        setLoading(true);
-        fetchCreators(dispatch, 0).then(() => setLoading(false));
-    }, [dispatch]);
+        AuthenticateUser(dispatch);
+        if (isUserAuth) {
+            setLoading(true);
+            fetchCreators(dispatch, 0).then(() => setLoading(false));
+        }
+    }, [dispatch, isUserAuth]);
 
     return (
         <MainWrapper>

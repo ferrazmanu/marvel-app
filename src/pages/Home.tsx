@@ -3,11 +3,14 @@ import { AuthenticateUser } from '../utils/authUser';
 import { Container, FullContainer } from '../components/Container';
 
 import img from '../assets/images/tchala-img.jpg';
+import { useDispatch } from 'react-redux';
 
 const Home: React.FC = () => {
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        AuthenticateUser();
-    }, []);
+        AuthenticateUser(dispatch);
+    }, [dispatch]);
 
     return (
         <FullContainer gradient={true}>
