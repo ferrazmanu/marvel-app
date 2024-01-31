@@ -6,6 +6,7 @@ import { setCharacters } from '../../redux/actions';
 import { selectCharacters } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
+import { Loading } from '../../components/Loading';
 
 const fetchCharacters = async (dispatch: Dispatch<UnknownAction>) => {
     try {
@@ -37,7 +38,7 @@ const Characters: React.FC = () => {
 
             <div>
                 {loading ? (
-                    <p>Carregando</p>
+                    <Loading />
                 ) : (
                     <ul>
                         {characters?.length > 0 ? (
@@ -45,7 +46,7 @@ const Characters: React.FC = () => {
                                 return <li key={data.id}>{data.name}</li>;
                             })
                         ) : (
-                            <p>Nenhum resultado</p>
+                            <p>Nenhum resultado.</p>
                         )}
                     </ul>
                 )}

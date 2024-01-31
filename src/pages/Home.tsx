@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { AuthenticateUser } from '../utils/authUser';
-import { FullContainer } from '../components/Container';
-import { Video } from '../components/Video';
+import { Container, FullContainer } from '../components/Container';
 
-import video from '../assets/images/tchala-video.mp4';
+import img from '../assets/images/tchala-img.jpg';
 
 const Home: React.FC = () => {
     useEffect(() => {
@@ -11,10 +10,18 @@ const Home: React.FC = () => {
     }, []);
 
     return (
-        <FullContainer>
-            <Video autoPlay muted loop id="tchala">
-                <source src={video} type="video/mp4" />
-            </Video>
+        <FullContainer gradient={true}>
+            <img src={img} />
+
+            <Container fullHeight>
+                <div className="content">
+                    <h1>Marvel App</h1>
+                    <p>
+                        Aproveite para explorar o website e conhecer seus heróis
+                        favoritos!
+                    </p>
+                </div>
+            </Container>
         </FullContainer>
     );
 };

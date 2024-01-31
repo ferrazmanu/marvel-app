@@ -9,6 +9,7 @@ declare module 'styled-components' {
             secondary: string;
             tertiary: string;
             quarternary: string;
+            quinquenary: string;
         };
         fontSizes: {
             big_80: string;

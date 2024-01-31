@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCreators } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
+import { Loading } from '../../components/Loading';
 
 const fetchCreators = async (dispatch: Dispatch<UnknownAction>) => {
     try {
@@ -37,7 +38,7 @@ const Creators: React.FC = () => {
 
             <div>
                 {loading ? (
-                    <p>Carregando</p>
+                    <Loading />
                 ) : (
                     <ul>
                         {creators?.length > 0 ? (
@@ -45,7 +46,7 @@ const Creators: React.FC = () => {
                                 return <li key={data.id}>{data.fullName}</li>;
                             })
                         ) : (
-                            <p>Nenhum resultado</p>
+                            <p>Nenhum resultado.</p>
                         )}
                     </ul>
                 )}

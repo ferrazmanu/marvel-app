@@ -7,7 +7,8 @@ const theme: DefaultTheme = {
         primary: '#C4A8FF',
         secondary: '#664EAE',
         tertiary: '#1A0554',
-        quarternary: '#0C0B13',
+        quarternary: '#090524',
+        quinquenary: '#0C0B13',
     },
     fontSizes: {
         big_80: 'clamp(2.37rem, 80px, 5rem)',

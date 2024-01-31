@@ -6,6 +6,7 @@ import { setCreators } from '../../redux/actions';
 import { selectComics } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
+import { Loading } from '../../components/Loading';
 
 const fetchComics = async (dispatch: Dispatch<UnknownAction>) => {
     try {
@@ -37,7 +38,7 @@ const Comics: React.FC = () => {
 
             <div>
                 {loading ? (
-                    <p>Carregando</p>
+                    <Loading />
                 ) : (
                     <ul>
                         {comics?.length > 0 ? (
@@ -45,7 +46,7 @@ const Comics: React.FC = () => {
                                 return <li key={data.id}>{data.title}</li>;
                             })
                         ) : (
-                            <p>Nenhum resultado</p>
+                            <p>Nenhum resultado.</p>
                         )}
                     </ul>
                 )}
