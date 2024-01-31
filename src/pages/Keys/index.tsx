@@ -4,13 +4,17 @@ import { setCookie } from '../../utils/cookies';
 import { useDispatch } from 'react-redux';
 import { setKeys } from '../../redux/actions';
 import { InputsProps } from '../../types/types';
-import { Container } from '../../components/Container';
+import { FullContainer } from '../../components/Container';
+import { FormContainer } from './styles';
+import { Button } from '../../components/Button';
+
+import img from '../../assets/images/3.jpg';
 
 const Keys: React.FC = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
         reset,
     } = useForm<InputsProps>();
 
@@ -26,25 +30,69 @@ const Keys: React.FC = () => {
         reset();
     };
 
+    const inputs = [
+        {
+            label: 'Public Key',
+            name: 'publicKey',
+            required: true,
+            error: 'Este campo é obrigatório',
+        },
+        {
+            label: 'Private Key',
+            name: 'privateKey',
+            required: true,
+            error: 'Este campo é obrigatório',
+        },
+    ];
+
     return (
-        <Container>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <h2>Please insert your marvel api keys</h2>
-                <div>
-                    <label>Public Key</label>
-                    <input {...register('publicKey', { required: true })} />
-                    {errors.publicKey && <span>This field is required</span>}
-                </div>
+        <FormContainer>
+            <FullContainer fullgradient={true}>
+                <img src={img} loading="eager" />
 
-                <div>
-                    <label>Private Key</label>
-                    <input {...register('privateKey', { required: true })} />
-                    {errors.privateKey && <span>This field is required</span>}
-                </div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className="form-content">
+                        <div className="title">
+                            <h2>Chaves da Marvel API</h2>
+                            <p>
+                                Por favor, insira suas chaves da Marvel API
+                                obtidas via{' '}
+                                <a href="https://developer.marvel.com/">
+                                    https://developer.marvel.com/
+                                </a>{' '}
+                                para poder acessar o conteúdo!
+                            </p>
+                        </div>
 
-                <input type="submit" />
-            </form>
-        </Container>
+                        {inputs.map((input) => {
+                            return (
+                                <div className="input-box" key={input.name}>
+                                    <label>{input.label}</label>
+                                    <div className="input-wrapper">
+                                        <input
+                                            {...register(`${input.name}`, {
+                                                required: input.required,
+                                            })}
+                                        />
+                                    </div>
+                                    {errors?.[input.name] && (
+                                        <span className="error">
+                                            {input.error}
+                                        </span>
+                                    )}
+                                </div>
+                            );
+                        })}
+                    </div>
+
+                    <Button
+                        type="submit"
+                        loading={isSubmitting}
+                        text="Enviar"
+                    />
+                </form>
+            </FullContainer>
+        </FormContainer>
     );
 };
 

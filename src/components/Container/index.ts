@@ -2,7 +2,9 @@ import styled, { css } from 'styled-components';
 
 interface Props {
     gradient?: boolean;
-    fullHeight?: boolean;
+    fullgradient?: boolean;
+    fullheight?: boolean;
+    center?: boolean;
 }
 
 const gradient = css`
@@ -22,15 +24,28 @@ const gradient = css`
     }
 `;
 
+const fullgradient = css`
+    &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        height: inherit;
+        width: inherit;
+        z-index: 1;
+        background-color: rgba(9, 5, 36, 0.8);
+    }
+`;
+
 export const Container = styled.div<Props>`
     max-width: 80dvw;
     width: 100%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    ${(props) => props.center && 'justify-content:center'};
     gap: ${({ theme }) => theme.spacing._30};
     padding: 2dvh 15px;
-    height: ${(props) => (props.fullHeight ? '100%' : 'auto')};
+    height: ${(props) => (props.fullheight ? '100%' : 'auto')};
 `;
 
 export const FullContainer = styled.div<Props>`
@@ -42,6 +57,7 @@ export const FullContainer = styled.div<Props>`
     position: absolute;
     inset: 0;
     ${(props) => props.gradient && gradient};
+    ${(props) => props.fullgradient && fullgradient};
 
     img {
         position: absolute;

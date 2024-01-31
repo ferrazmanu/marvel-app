@@ -11,9 +11,9 @@ const Home: React.FC = () => {
 
     return (
         <FullContainer gradient={true}>
-            <img src={img} />
+            <img src={img} loading="eager" />
 
-            <Container fullHeight>
+            <Container fullheight>
                 <div className="content">
                     <h1>Marvel App</h1>
                     <p>

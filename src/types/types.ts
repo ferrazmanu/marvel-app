@@ -28,4 +28,5 @@ export interface CreatorsProps {
 export interface InputsProps {
     publicKey: string;
     privateKey: string;
+    [key: string]: unknown;
 }

@@ -1,6 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+    html{
+      height: 100%;
+    }
+
    *{
        margin: 0;
        padding: 0;
@@ -10,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 
    #root{
        margin:0 auto;
+       height: 100%;
    }
 
    a{
@@ -28,13 +33,23 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: ${({ theme }) => theme.colors.quinquenary};
-    color: ${({ theme }) => theme.colors.white}
+    background: linear-gradient(0deg, rgba(9,5,36,1) 0%, rgba(12,11,19,1) 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: ${({ theme }) => theme.colors.white};
+    height: 100%;
   }
 
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
+  }
+
+  .error{
+    font-size: ${({ theme }) => theme.fontSizes.small_12};
+    color:red;
+    display: block;
   }
 
   @font-face {

@@ -14,27 +14,33 @@ import store from './redux/store';
 import GlobalStyle from './styles/global';
 import { Header } from './components/Shared/Header';
 import Theme from './components/Shared/Theme';
+import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <Home />,
+        errorElement: <NotFound />,
     },
     {
         path: '/keys',
         element: <Keys />,
+        errorElement: <NotFound />,
     },
     {
         path: '/characters',
         element: <Characters />,
+        errorElement: <NotFound />,
     },
     {
         path: '/comics',
         element: <Comics />,
+        errorElement: <NotFound />,
     },
     {
         path: '/creators',
         element: <Creators />,
+        errorElement: <NotFound />,
     },
 ]);
 
@@ -42,7 +48,8 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-const isKeysPage = window.location.pathname === '/keys';
+const mainPages = ['/', '/characters', '/comics', '/creators'];
+const isMainPage = !mainPages.includes(window.location.pathname);
 
 root.render(
     <React.StrictMode>
@@ -50,7 +57,7 @@ root.render(
             <Theme>
                 <GlobalStyle />
 
-                {!isKeysPage && <Header />}
+                {!isMainPage && <Header />}
 
                 <RouterProvider router={router} />
             </Theme>
