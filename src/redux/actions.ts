@@ -11,7 +11,7 @@ export const setKeys = (publicKey: string, privateKey: string) => ({
     payload: { publicKey, privateKey },
 });
 
-export const setCharacters = (characters: CharactersProps[]) => ({
+export const setCharacters = (characters: CharactersProps) => ({
     type: SET_CHARACTERS,
     payload: { characters },
 });

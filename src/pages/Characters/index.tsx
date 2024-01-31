@@ -7,15 +7,27 @@ import { selectCharacters } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
 import { Loading } from '../../components/Loading';
+import { Paginate } from '../../components/Paginate';
 
-const fetchCharacters = async (dispatch: Dispatch<UnknownAction>) => {
+const fetchCharacters = async (
+    dispatch: Dispatch<UnknownAction>,
+    pageNumber: number
+) => {
+    const limit = 20;
+    const offset = pageNumber * limit;
+
     try {
-        const response = await http.get('characters');
+        const response = await http.get('characters', {
+            params: {
+                offset: offset >= 0 ? offset : 0,
+                limit,
+            },
+        });
 
         if (response.status !== 200) {
             throw new Error('Network response was not ok');
         }
-        dispatch(setCharacters(response.data.data.results));
+        dispatch(setCharacters(response.data.data));
     } catch (e) {
         console.error(e);
     }
@@ -26,10 +38,18 @@ const Characters: React.FC = () => {
     const dispatch = useDispatch();
     const characters = useSelector(selectCharacters);
 
+    const pageCount = Math.ceil(characters.total / 20);
+
+    const handlePageClick = (event: { selected: number }) => {
+        const { selected } = event;
+        setLoading(true);
+        fetchCharacters(dispatch, selected).then(() => setLoading(false));
+    };
+
     useEffect(() => {
         if (!AuthenticateUser()) return;
         setLoading(true);
-        fetchCharacters(dispatch).then(() => setLoading(false));
+        fetchCharacters(dispatch, 1).then(() => setLoading(false));
     }, [dispatch]);
 
     return (
@@ -41,9 +61,9 @@ const Characters: React.FC = () => {
                     <Loading />
                 ) : (
                     <ul>
-                        {characters?.length > 0 ? (
-                            characters.map((data) => {
-                                return <li key={data.id}>{data.name}</li>;
+                        {characters?.results.length > 0 ? (
+                            characters.results.map((item) => {
+                                return <li key={item.id}>{item.name}</li>;
                             })
                         ) : (
                             <p>Nenhum resultado.</p>
@@ -51,6 +71,8 @@ const Characters: React.FC = () => {
                     </ul>
                 )}
             </div>
+
+            <Paginate onPageChange={handlePageClick} pageCount={pageCount} />
         </Container>
     );
 };

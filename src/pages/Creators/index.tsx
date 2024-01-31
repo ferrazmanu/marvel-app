@@ -7,15 +7,26 @@ import { selectCreators } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
 import { Loading } from '../../components/Loading';
+import { Paginate } from '../../components/Paginate';
 
-const fetchCreators = async (dispatch: Dispatch<UnknownAction>) => {
+const fetchCreators = async (
+    dispatch: Dispatch<UnknownAction>,
+    pageNumber: number
+) => {
+    const limit = 20;
+    const offset = pageNumber * limit;
     try {
-        const response = await http.get('creators');
+        const response = await http.get('creators', {
+            params: {
+                offset: offset >= 0 ? offset : 0,
+                limit,
+            },
+        });
 
         if (response.status !== 200) {
             throw new Error('Network response was not ok');
         }
-        dispatch(setCreators(response.data.data.results));
+        dispatch(setCreators(response.data.data));
     } catch (e) {
         console.error(e);
     }
@@ -26,10 +37,18 @@ const Creators: React.FC = () => {
     const dispatch = useDispatch();
     const creators = useSelector(selectCreators);
 
+    const pageCount = Math.ceil(creators.total / 20);
+
+    const handlePageClick = (event: { selected: number }) => {
+        const { selected } = event;
+        setLoading(true);
+        fetchCreators(dispatch, selected).then(() => setLoading(false));
+    };
+
     useEffect(() => {
         if (!AuthenticateUser()) return;
         setLoading(true);
-        fetchCreators(dispatch).then(() => setLoading(false));
+        fetchCreators(dispatch, 1).then(() => setLoading(false));
     }, [dispatch]);
 
     return (
@@ -41,9 +60,9 @@ const Creators: React.FC = () => {
                     <Loading />
                 ) : (
                     <ul>
-                        {creators?.length > 0 ? (
-                            creators.map((data) => {
-                                return <li key={data.id}>{data.fullName}</li>;
+                        {creators?.results.length > 0 ? (
+                            creators.results.map((item) => {
+                                return <li key={item.id}>{item.fullName}</li>;
                             })
                         ) : (
                             <p>Nenhum resultado.</p>
@@ -51,6 +70,8 @@ const Creators: React.FC = () => {
                     </ul>
                 )}
             </div>
+
+            <Paginate onPageChange={handlePageClick} pageCount={pageCount} />
         </Container>
     );
 };

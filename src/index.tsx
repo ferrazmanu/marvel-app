@@ -12,8 +12,8 @@ import Characters from './pages/Characters';
 
 import store from './redux/store';
 import GlobalStyle from './styles/global';
-import { Header } from './components/Shared/Header';
-import Theme from './components/Shared/Theme';
+import { Header } from './components/Header';
+import Theme from './components/Theme';
 import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([

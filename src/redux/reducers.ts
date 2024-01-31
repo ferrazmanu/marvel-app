@@ -15,9 +15,27 @@ const initialState: RootState = {
         publicKey: publicKey || '',
         privateKey: privateKey || '',
     },
-    characters: [],
-    comics: [],
-    creators: [],
+    characters: {
+        count: 20,
+        limit: 20,
+        offset: 0,
+        results: [],
+        total: 0,
+    },
+    comics: {
+        count: 20,
+        limit: 20,
+        offset: 0,
+        results: [],
+        total: 0,
+    },
+    creators: {
+        count: 20,
+        limit: 20,
+        offset: 0,
+        results: [],
+        total: 0,
+    },
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
