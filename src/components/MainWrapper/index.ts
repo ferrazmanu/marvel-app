@@ -6,7 +6,7 @@ export const MainWrapper = styled.main`
 
     .grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         grid-column-gap: ${({ theme }) => theme.spacing._30};
         grid-row-gap: 40px;
 
@@ -19,7 +19,7 @@ export const MainWrapper = styled.main`
             width: 100%;
             display: flex;
             flex-direction: column;
-            max-width: 400px;
+            max-width: 300px;
 
             p {
                 text-align: center;

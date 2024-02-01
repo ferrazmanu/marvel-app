@@ -13,7 +13,8 @@ import PageTitle from '../../components/PageTitle';
 
 const fetchCharacters = async (
     dispatch: Dispatch<UnknownAction>,
-    pageNumber: number
+    pageNumber: number,
+    searchValue?: string
 ) => {
     const limit = 20;
     const offset = pageNumber * limit;
@@ -23,6 +24,7 @@ const fetchCharacters = async (
             params: {
                 offset: offset >= 0 ? offset : 0,
                 limit,
+                nameStartsWith: searchValue || null,
             },
         });
 
@@ -61,7 +63,15 @@ const Characters: React.FC = () => {
     return (
         <MainWrapper>
             <Container fullheight>
-                <PageTitle title="Personagens" />
+                <PageTitle
+                    title="Personagens"
+                    searchFunc={(value: string) => {
+                        setLoading(true);
+                        fetchCharacters(dispatch, 0, value).then(() =>
+                            setLoading(false)
+                        );
+                    }}
+                />
 
                 {loading ? (
                     <Loading />
@@ -70,12 +80,16 @@ const Characters: React.FC = () => {
                         {characters?.results.length > 0 ? (
                             characters.results.map((item) => {
                                 return (
-                                    <div className="item" key={item.id}>
+                                    <a
+                                        href={`/characters/${item.id}`}
+                                        className="item"
+                                        key={item.id}
+                                    >
                                         <p>{item.name}</p>
                                         <img
                                             src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
                                         />
-                                    </div>
+                                    </a>
                                 );
                             })
                         ) : (

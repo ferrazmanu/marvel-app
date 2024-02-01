@@ -3,14 +3,15 @@ import SearchBar from '../SearchBar';
 import * as S from './styles';
 
 interface Props {
-    title: string;
+    title?: string;
+    searchFunc?: (e: string) => void;
 }
 
-const PageTitle: FC<Props> = ({ title }) => {
+const PageTitle: FC<Props> = ({ title, searchFunc }) => {
     return (
         <S.Wrapper>
             <h2>{title}</h2>
-            <SearchBar />
+            {searchFunc && <SearchBar searchFunc={searchFunc} />}
         </S.Wrapper>
     );
 };

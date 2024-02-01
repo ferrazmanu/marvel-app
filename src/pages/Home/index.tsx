@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { AuthenticateUser } from '../utils/authUser';
-import { Container, FullContainer } from '../components/Container';
+import { AuthenticateUser } from '../../utils/authUser';
+import { Container, FullContainer } from '../../components/Container';
 
-import img from '../assets/images/tchala-img.jpg';
+import img from '../../assets/images/tchala-img.jpg';
 import { useDispatch } from 'react-redux';
 
 const Home: React.FC = () => {

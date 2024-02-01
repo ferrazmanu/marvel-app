@@ -9,7 +9,7 @@ export const Header = styled.header`
         justify-content: space-between;
         gap: ${({ theme }) => theme.spacing._30};
         padding: 45px 30px;
-        max-width: 50dvw;
+        max-width: 70dvw;
         width: 100%;
         margin: 0 auto;
 

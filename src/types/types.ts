@@ -16,9 +16,24 @@ export interface CharactersProps {
 export interface CharacterProps {
     name: string;
     id: string | number;
+    description: string;
     thumbnail: {
         path: string;
         extension: string;
+    };
+    series: {
+        items: [
+            {
+                name: string;
+            },
+        ];
+    };
+    stories: {
+        items: [
+            {
+                name: string;
+            },
+        ];
     };
 }
 
@@ -32,9 +47,39 @@ export interface ComicsProps {
 export interface ComicProps {
     id: string | number;
     title: string;
+    description: string;
     thumbnail: {
         path: string;
         extension: string;
+    };
+    series: {
+        items: [
+            {
+                name: string;
+            },
+        ];
+    };
+    stories: {
+        items: [
+            {
+                name: string;
+            },
+        ];
+    };
+    characters: {
+        items: [
+            {
+                name: string;
+            },
+        ];
+    };
+    creators: {
+        items: [
+            {
+                name: string;
+                role: string;
+            },
+        ];
     };
 }
 
@@ -48,9 +93,38 @@ export interface CreatorsProps {
 export interface CreatorProps {
     id: string | number;
     fullName: string;
+    description: string;
     thumbnail: {
         path: string;
         extension: string;
+    };
+    series: {
+        items: [
+            {
+                name: string;
+            },
+        ];
+    };
+    stories: {
+        items: [
+            {
+                name: string;
+            },
+        ];
+    };
+    comics: {
+        items: [
+            {
+                name: string;
+            },
+        ];
+    };
+    events: {
+        items: [
+            {
+                name: string;
+            },
+        ];
     };
 }
 

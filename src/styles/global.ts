@@ -20,8 +20,14 @@ const GlobalStyle = createGlobalStyle`
 
    #root{
        margin:0 auto;
-           min-height: 100dvh;
+       min-height: 100dvh;
    }
+
+    input, button{
+        background-color: transparent;
+        appearance: none;
+        border: none;
+    }
 
    a{
     text-decoration: none;

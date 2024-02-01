@@ -2,10 +2,14 @@ import { FC } from 'react';
 import { Input } from '../Input';
 import * as S from './styles';
 
-const SearchBar: FC = () => {
+interface Props {
+    searchFunc: (e: string) => void;
+}
+
+const SearchBar: FC<Props> = ({ searchFunc }) => {
     return (
         <S.Wrapper>
-            <Input />
+            <Input searchFunc={searchFunc} />
         </S.Wrapper>
     );
 };

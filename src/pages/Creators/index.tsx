@@ -9,10 +9,12 @@ import { Container } from '../../components/Container';
 import Loading from '../../components/Loading';
 import Paginate from '../../components/Paginate';
 import { MainWrapper } from '../../components/MainWrapper';
+import PageTitle from '../../components/PageTitle';
 
 const fetchCreators = async (
     dispatch: Dispatch<UnknownAction>,
-    pageNumber: number
+    pageNumber: number,
+    searchValue?: string
 ) => {
     const limit = 20;
     const offset = pageNumber * limit;
@@ -21,6 +23,7 @@ const fetchCreators = async (
             params: {
                 offset: offset >= 0 ? offset : 0,
                 limit,
+                nameStartsWith: searchValue || null,
             },
         });
 
@@ -59,7 +62,15 @@ const Creators: React.FC = () => {
     return (
         <MainWrapper>
             <Container fullheight>
-                <h2>Criadores</h2>
+                <PageTitle
+                    title="Criadores"
+                    searchFunc={(value: string) => {
+                        setLoading(true);
+                        fetchCreators(dispatch, 0, value).then(() =>
+                            setLoading(false)
+                        );
+                    }}
+                />
 
                 {loading ? (
                     <Loading />
@@ -68,12 +79,16 @@ const Creators: React.FC = () => {
                         {creators?.results.length > 0 ? (
                             creators.results.map((item) => {
                                 return (
-                                    <div className="item" key={item.id}>
+                                    <a
+                                        href={`/creators/${item.id}`}
+                                        className="item"
+                                        key={item.id}
+                                    >
                                         <p>{item.fullName}</p>
                                         <img
                                             src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
                                         />
-                                    </div>
+                                    </a>
                                 );
                             })
                         ) : (

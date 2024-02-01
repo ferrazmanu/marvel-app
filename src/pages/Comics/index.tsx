@@ -9,10 +9,12 @@ import { Container } from '../../components/Container';
 import Loading from '../../components/Loading';
 import Paginate from '../../components/Paginate';
 import { MainWrapper } from '../../components/MainWrapper';
+import PageTitle from '../../components/PageTitle';
 
 const fetchComics = async (
     dispatch: Dispatch<UnknownAction>,
-    pageNumber: number
+    pageNumber: number,
+    searchValue?: string
 ) => {
     const limit = 20;
     const offset = pageNumber * limit;
@@ -22,6 +24,7 @@ const fetchComics = async (
             params: {
                 offset: offset >= 0 ? offset : 0,
                 limit,
+                titleStartsWith: searchValue || null,
             },
         });
 
@@ -60,8 +63,15 @@ const Comics: React.FC = () => {
     return (
         <MainWrapper>
             <Container fullheight>
-                <h2>Quadrinhos</h2>
-
+                <PageTitle
+                    title="Quadrinhos"
+                    searchFunc={(value: string) => {
+                        setLoading(true);
+                        fetchComics(dispatch, 0, value).then(() =>
+                            setLoading(false)
+                        );
+                    }}
+                />
                 {loading ? (
                     <Loading />
                 ) : (
@@ -69,12 +79,16 @@ const Comics: React.FC = () => {
                         {comics?.results.length > 0 ? (
                             comics.results.map((item) => {
                                 return (
-                                    <div className="item" key={item.id}>
+                                    <a
+                                        href={`/comics/${item.id}`}
+                                        className="item"
+                                        key={item.id}
+                                    >
                                         <p>{item.title}</p>
                                         <img
                                             src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
                                         />
-                                    </div>
+                                    </a>
                                 );
                             })
                         ) : (
