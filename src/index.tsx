@@ -12,10 +12,10 @@ import Characters from './pages/Characters';
 
 import store from './redux/store';
 import GlobalStyle from './styles/global';
-import { Header } from './components/Header';
+import Header from './components/Header';
 import Theme from './components/Theme';
 import NotFound from './pages/NotFound';
-import { Footer } from './components/Footer';
+import Footer from './components/Footer';
 
 const router = createBrowserRouter([
     {

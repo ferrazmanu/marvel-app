@@ -3,7 +3,7 @@ import { Wrapper } from './styles';
 import { useRouteError } from 'react-router-dom';
 
 import img from '../../assets/images/5.jpg';
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 
 const NotFound: React.FC = () => {
     const error: unknown = useRouteError();

@@ -6,8 +6,8 @@ import { setComics } from '../../redux/actions';
 import { selectAuth, selectComics } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
-import { Loading } from '../../components/Loading';
-import { Paginate } from '../../components/Paginate';
+import Loading from '../../components/Loading';
+import Paginate from '../../components/Paginate';
 import { MainWrapper } from '../../components/MainWrapper';
 
 const fetchComics = async (
