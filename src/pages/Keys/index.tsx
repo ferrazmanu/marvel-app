@@ -4,12 +4,14 @@ import { getCookie, setCookie } from '../../utils/cookies';
 import { InputsProps } from '../../types/types';
 import { FullContainer } from '../../components/Container';
 import { Wrapper } from './styles';
-import { Button } from '../../components/Button';
+import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
 
 import img from '../../assets/images/3.jpg';
 import { useSelector } from 'react-redux';
 import { selectAuth } from '../../redux/selectors';
+import Input from '../../components/Input';
+import { Label } from '../../components/Label';
 
 const Keys: React.FC = () => {
     const {
@@ -72,14 +74,12 @@ const Keys: React.FC = () => {
                         {inputs.map((input) => {
                             return (
                                 <div className="input-box" key={input.name}>
-                                    <label>{input.label}</label>
-                                    <div className="input-wrapper">
-                                        <input
-                                            {...register(`${input.name}`, {
-                                                required: input.required,
-                                            })}
-                                        />
-                                    </div>
+                                    <Label>{input.label}</Label>
+                                    <Input
+                                        {...register(`${input.name}`, {
+                                            required: input.required,
+                                        })}
+                                    />
                                     {errors?.[input.name] && (
                                         <span className="error">
                                             {input.error}

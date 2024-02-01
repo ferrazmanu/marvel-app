@@ -1,4 +1,5 @@
-import { Loading } from '../Loading';
+import { FC } from 'react';
+import Loading from '../Loading';
 import * as S from './styles';
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
     maxWidth?: string;
 }
 
-export const Button = ({ loading, text, type, onClick, maxWidth }: Props) => {
+const Button: FC<Props> = ({ loading, text, type, onClick, maxWidth }) => {
     return (
         <S.Button
             type={type}
@@ -21,3 +22,5 @@ export const Button = ({ loading, text, type, onClick, maxWidth }: Props) => {
         </S.Button>
     );
 };
+
+export default Button;

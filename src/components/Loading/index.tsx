@@ -1,6 +1,12 @@
+import { FC } from 'react';
 import { Wrapper } from './styles';
 
-export const Loading = ({ color = '#fff', size = '54px' }) => {
+interface Props {
+    color?: string;
+    size?: string;
+}
+
+const Loading: FC<Props> = ({ color = '#fff', size = '54px' }) => {
     return (
         <Wrapper>
             <svg
@@ -44,3 +50,5 @@ export const Loading = ({ color = '#fff', size = '54px' }) => {
         </Wrapper>
     );
 };
+
+export default Loading;

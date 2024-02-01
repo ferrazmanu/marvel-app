@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import * as S from './styles';
 import ReactPaginate from 'react-paginate';
 
@@ -6,7 +7,7 @@ interface Props {
     pageCount: number;
 }
 
-export const Paginate = ({ onPageChange, pageCount }: Props) => {
+const Paginate: FC<Props> = ({ onPageChange, pageCount }) => {
     return (
         <S.Paginate>
             <ReactPaginate
@@ -21,3 +22,5 @@ export const Paginate = ({ onPageChange, pageCount }: Props) => {
         </S.Paginate>
     );
 };
+
+export default Paginate;

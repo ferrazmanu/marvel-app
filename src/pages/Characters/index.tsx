@@ -6,9 +6,10 @@ import { setCharacters } from '../../redux/actions';
 import { selectAuth, selectCharacters } from '../../redux/selectors';
 import { UnknownAction } from 'redux';
 import { Container } from '../../components/Container';
-import { Loading } from '../../components/Loading';
-import { Paginate } from '../../components/Paginate';
+import Loading from '../../components/Loading';
+import Paginate from '../../components/Paginate';
 import { MainWrapper } from '../../components/MainWrapper';
+import PageTitle from '../../components/PageTitle';
 
 const fetchCharacters = async (
     dispatch: Dispatch<UnknownAction>,
@@ -60,7 +61,7 @@ const Characters: React.FC = () => {
     return (
         <MainWrapper>
             <Container fullheight>
-                <h2>Personagens</h2>
+                <PageTitle title="Personagens" />
 
                 {loading ? (
                     <Loading />
