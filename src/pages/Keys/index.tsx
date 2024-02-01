@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { getCookie, setCookie } from '../../utils/cookies';
 import { InputsProps } from '../../types/types';
@@ -10,14 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import img from '../../assets/images/3.jpg';
 import { useSelector } from 'react-redux';
 import { selectAuth } from '../../redux/selectors';
-import Input from '../../components/Input';
+import { Input } from '../../components/Input';
 import { Label } from '../../components/Label';
 
 const Keys: React.FC = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: { errors },
         reset,
     } = useForm<InputsProps>({
         defaultValues: {
@@ -26,15 +26,24 @@ const Keys: React.FC = () => {
         },
     });
 
+    const [loading, setLoading] = useState(false);
     const isUserAuth = useSelector(selectAuth);
     const navigate = useNavigate();
 
-    const onSubmit: SubmitHandler<InputsProps> = (data) => {
-        setCookie('publicKey', data.publicKey, { expires: 7 });
-        setCookie('privateKey', data.privateKey, { expires: 7 });
+    const onSubmit: SubmitHandler<InputsProps> = async (data) => {
+        setLoading(true);
 
-        window.location.href = '/';
-        reset();
+        try {
+            setCookie('publicKey', data.publicKey, { expires: 7 });
+            setCookie('privateKey', data.privateKey, { expires: 7 });
+
+            window.location.href = '/';
+        } catch (error) {
+            console.error('Erro ao processar formulário:', error);
+        } finally {
+            reset();
+            setLoading(false);
+        }
     };
 
     const inputs = [
@@ -92,7 +101,7 @@ const Keys: React.FC = () => {
 
                     <div className="buttons">
                         <Button
-                            loading={isSubmitting}
+                            loading={loading}
                             type="submit"
                             text={isUserAuth ? 'Alterar' : 'Enviar'}
                         />
