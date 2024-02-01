@@ -1,8 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 
-import TTF from '../assets/fonts/Marvel-Regular.ttf';
-import WOFF from '../assets/fonts/Marvel-Regular.woff';
-import WOFF2 from '../assets/fonts/Marvel-Regular.woff2';
+import TTFMarvel from '../assets/fonts/Marvel/Marvel-Regular.ttf';
+import WOFFMarvel from '../assets/fonts/Marvel/Marvel-Regular.woff';
+import WOFF2Marvel from '../assets/fonts/Marvel/Marvel-Regular.woff2';
+
+import TTFRobotoRegular from '../assets/fonts/Roboto/Roboto-Regular.ttf';
 
 const GlobalStyle = createGlobalStyle`
     html{
@@ -57,11 +59,19 @@ const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: 'Marvel';
-    src: url(${TTF}) format('truetype'), url(${WOFF2}) format('woff2'), url(${WOFF}) format('woff');
+    src: url(${TTFMarvel}) format('truetype'), url(${WOFF2Marvel}) format('woff2'), url(${WOFFMarvel}) format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-}
+  }
+
+  @font-face {
+      font-family: 'Roboto';
+      src: url(${TTFRobotoRegular}) format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+  }
 `;
 
 export default GlobalStyle;
