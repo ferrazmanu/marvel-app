@@ -3,6 +3,7 @@ export interface RootState {
     characters: CharactersProps;
     comics: ComicsProps;
     creators: CreatorsProps;
+    theme?: string;
 }
 
 export interface CharactersProps {

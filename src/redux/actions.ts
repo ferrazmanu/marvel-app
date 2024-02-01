@@ -3,6 +3,7 @@ import {
     SET_CHARACTERS,
     SET_COMICS,
     SET_CREATORS,
+    SET_THEME,
 } from './constants';
 import { CharactersProps, ComicsProps, CreatorsProps } from '../types/types';
 
@@ -24,4 +25,9 @@ export const setComics = (comics: ComicsProps[]) => ({
 export const setCreators = (creators: CreatorsProps[]) => ({
     type: SET_CREATORS,
     payload: { creators },
+});
+
+export const setTheme = (theme: string) => ({
+    type: SET_THEME,
+    payload: { theme },
 });

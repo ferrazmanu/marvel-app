@@ -29,6 +29,7 @@ import Footer from './components/Footer';
 import store from './redux/store';
 
 import GlobalStyle from './styles/global';
+import { ThemeButton } from './components/ThemeButton';
 
 const router = createBrowserRouter([
     {
@@ -85,6 +86,7 @@ root.render(
         <Provider store={store}>
             <Theme>
                 <GlobalStyle />
+                <ThemeButton />
 
                 {!isExcludedPage && <Header />}
 

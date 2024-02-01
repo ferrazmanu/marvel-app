@@ -1,10 +1,13 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 import TTFMarvel from '../assets/fonts/Marvel/Marvel-Regular.ttf';
 import WOFFMarvel from '../assets/fonts/Marvel/Marvel-Regular.woff';
 import WOFF2Marvel from '../assets/fonts/Marvel/Marvel-Regular.woff2';
 
 import TTFRobotoRegular from '../assets/fonts/Roboto/Roboto-Regular.ttf';
+import { getCookie } from '../utils/cookies';
+
+const chosenTheme = getCookie('theme');
 
 const GlobalStyle = createGlobalStyle`
     html{
@@ -49,10 +52,24 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${({ theme }) => theme.fonts.secondary};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: linear-gradient(0deg, rgba(9,5,36,1) 0%, rgba(12,11,19,1) 100%);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+
+    ${({ theme }) =>
+        chosenTheme === 'light'
+            ? css`
+                  background: linear-gradient(
+                      0deg,
+                      rgba(9, 5, 36, 1) 0%,
+                      rgba(12, 11, 19, 1) 100%
+                  );
+                  background-repeat: no-repeat;
+                  background-size: cover;
+                  background-position: center center;
+              `
+            : css`
+                  background-color: ${theme.colors.quinquenary};
+              `}
+
+
     color: ${({ theme }) => theme.colors.white};
     min-height: 100dvh;
   }

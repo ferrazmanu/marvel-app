@@ -1,14 +1,20 @@
-import { getCookie } from '../utils/cookies';
+import { getCookie, setCookie } from '../utils/cookies';
 import {
     SET_AUTH,
     SET_CHARACTERS,
     SET_COMICS,
     SET_CREATORS,
+    SET_THEME,
 } from './constants';
 import { RootState } from '../types/types';
 
 const publicKey = getCookie('publicKey');
 const privateKey = getCookie('privateKey');
+
+const themePreference = getCookie('themePreference');
+const theme = getCookie('theme');
+
+console.log(theme);
 
 const initialState: RootState = {
     auth: !!(publicKey && privateKey),
@@ -33,6 +39,7 @@ const initialState: RootState = {
         results: [],
         total: 0,
     },
+    theme: theme || themePreference,
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -57,6 +64,12 @@ export const reducer = (state = initialState, action: any): RootState => {
             return {
                 ...state,
                 creators: action.payload.creators,
+            };
+        case SET_THEME:
+            setCookie('theme', action.payload.theme);
+            return {
+                ...state,
+                theme: action.payload.theme,
             };
         default:
             return state;
