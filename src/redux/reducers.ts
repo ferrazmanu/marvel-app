@@ -14,8 +14,6 @@ const privateKey = getCookie('privateKey');
 const themePreference = getCookie('themePreference');
 const theme = getCookie('theme');
 
-console.log(theme);
-
 const initialState: RootState = {
     auth: !!(publicKey && privateKey),
     characters: {

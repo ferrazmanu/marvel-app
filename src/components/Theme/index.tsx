@@ -1,15 +1,8 @@
+import { useSelector } from 'react-redux';
 import { DefaultTheme, ThemeProvider } from 'styled-components';
+import { selectTheme } from '../../redux/selectors';
 
 const theme: DefaultTheme = {
-    colors: {
-        white: '#ebebeb',
-        black: '#0a0a0a',
-        primary: '#C4A8FF',
-        secondary: '#664EAE',
-        tertiary: '#1A0554',
-        quarternary: '#090524',
-        quinquenary: '#0C0B13',
-    },
     fontSizes: {
         big_80: 'clamp(2.37rem, 80px, 5rem)',
         big_64: 'clamp(1.875rem, 64px, 4rem)',
@@ -31,11 +24,58 @@ const theme: DefaultTheme = {
         primary: 'Marvel',
         secondary: 'Roboto',
     },
+    colors: {
+        primary: '#C4A8FF',
+        secondary: '#664EAE',
+        tertiary: '#1A0554',
+        quarternary: '#090524',
+        quinquenary: '#0C0B13',
+    },
+    light: {
+        colors: {
+            white: ' #0a0a0a',
+            black: '#ebebeb',
+            background: '#C4A8FF',
+            gradient:
+                'linear-gradient( 0deg, rgba(255, 255, 255, 0) 0%, rgb(97 97 97) 100% )',
+            fullgradient: 'rgba(159, 159, 159, 0.44)',
+            button: 'transparent',
+            loading: '#0a0a0a',
+        },
+    },
+    dark: {
+        colors: {
+            white: '#ebebeb',
+            black: '#0a0a0a',
+            background:
+                'linear-gradient(0deg,rgba(9, 5, 36, 1) 0%,rgba(12, 11, 19, 1) 100%)',
+            gradient:
+                'linear-gradient( 0deg, rgba(255, 255, 255, 0) 0%, rgba(9, 5, 36, 1) 100% )',
+            fullgradient: 'rgba(9, 5, 36, 0.8)',
+            button: '#1A0554',
+            loading: '#ebebeb',
+        },
+    },
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const Theme = ({ children }: any) => (
-    <ThemeProvider theme={theme}>{children}</ThemeProvider>
-);
+const Theme = ({ children }: any) => {
+    const chosenTheme = useSelector(selectTheme);
+
+    let currentTheme;
+    if (chosenTheme === 'light') {
+        currentTheme = {
+            ...theme,
+            colors: { ...theme.colors, ...theme.light.colors },
+        };
+    } else {
+        currentTheme = {
+            ...theme,
+            colors: { ...theme.colors, ...theme.dark.colors },
+        };
+    }
+
+    return <ThemeProvider theme={currentTheme}>{children}</ThemeProvider>;
+};
 
 export default Theme;

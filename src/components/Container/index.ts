@@ -16,11 +16,7 @@ const gradient = css`
         width: inherit;
         z-index: 1;
 
-        background: linear-gradient(
-            0deg,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(9, 5, 36, 1) 100%
-        );
+        background: ${({ theme }) => theme.colors.gradient};
     }
 `;
 
@@ -32,7 +28,7 @@ const fullgradient = css`
         height: inherit;
         width: inherit;
         z-index: 1;
-        background-color: rgba(9, 5, 36, 0.8);
+        background-color: ${({ theme }) => theme.colors.fullgradient};
     }
 `;
 

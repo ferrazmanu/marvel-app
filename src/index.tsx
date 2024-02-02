@@ -29,7 +29,7 @@ import Footer from './components/Footer';
 import store from './redux/store';
 
 import GlobalStyle from './styles/global';
-import { ThemeButton } from './components/ThemeButton';
+import { DarkModeButton } from './components/DarkModeButton';
 
 const router = createBrowserRouter([
     {
@@ -74,6 +74,21 @@ const router = createBrowserRouter([
     },
 ]);
 
+const App = () => {
+    return (
+        <Theme>
+            <GlobalStyle />
+            <DarkModeButton />
+
+            {!isExcludedPage && <Header />}
+
+            <RouterProvider router={router} />
+
+            <Footer />
+        </Theme>
+    );
+};
+
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
@@ -84,16 +99,7 @@ const isExcludedPage = excludedPages.includes(window.location.pathname);
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <Theme>
-                <GlobalStyle />
-                <ThemeButton />
-
-                {!isExcludedPage && <Header />}
-
-                <RouterProvider router={router} />
-
-                <Footer />
-            </Theme>
+            <App />
         </Provider>
     </React.StrictMode>
 );

@@ -1,13 +1,10 @@
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 import TTFMarvel from '../assets/fonts/Marvel/Marvel-Regular.ttf';
 import WOFFMarvel from '../assets/fonts/Marvel/Marvel-Regular.woff';
 import WOFF2Marvel from '../assets/fonts/Marvel/Marvel-Regular.woff2';
 
 import TTFRobotoRegular from '../assets/fonts/Roboto/Roboto-Regular.ttf';
-import { getCookie } from '../utils/cookies';
-
-const chosenTheme = getCookie('theme');
 
 const GlobalStyle = createGlobalStyle`
     html{
@@ -34,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
 
    a{
     text-decoration: none;
-    color: ${({ theme }) => theme.colors.white}
+    color: ${({ theme }) => theme.colors.white};
    }
 
    ul, li{
@@ -42,9 +39,9 @@ const GlobalStyle = createGlobalStyle`
    }
 
    h1, h2, h3, h4, h5, h6{
-    font-family: ${({ theme }) => theme.fonts.primary};
     text-transform: uppercase;
     font-weight: 400;
+    font-family: ${({ theme }) => theme.fonts.primary};
    }
 
   body {
@@ -52,25 +49,12 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${({ theme }) => theme.fonts.secondary};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    ${({ theme }) =>
-        chosenTheme === 'light'
-            ? css`
-                  background: linear-gradient(
-                      0deg,
-                      rgba(9, 5, 36, 1) 0%,
-                      rgba(12, 11, 19, 1) 100%
-                  );
-                  background-repeat: no-repeat;
-                  background-size: cover;
-                  background-position: center center;
-              `
-            : css`
-                  background-color: ${theme.colors.quinquenary};
-              `}
-
-
+    transition: 0.3s ease-in-out;
     color: ${({ theme }) => theme.colors.white};
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background: ${({ theme }) => theme.colors.background};
     min-height: 100dvh;
   }
 

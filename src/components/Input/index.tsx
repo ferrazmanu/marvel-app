@@ -21,7 +21,7 @@ export const Input: FC<InputProps> = forwardRef<HTMLInputElement, InputProps>(
         };
 
         return (
-            <S.Wrapper>
+            <S.Wrapper className="input-wrapper">
                 {props.searchFunc && (
                     <button
                         onClick={() =>

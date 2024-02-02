@@ -23,7 +23,6 @@ export const Header = styled.header`
                 box-shadow: 0 0 1px rgb(0 0 0 / 0%);
                 position: relative;
                 overflow: hidden;
-                color: ${({ theme }) => theme.colors.white};
 
                 &::before {
                     content: '';

@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const Button = styled.button<Props>`
-    background-color: ${({ theme }) => theme.colors.tertiary};
+    background-color: ${({ theme }) => theme.colors.button};
     border: 2px solid ${({ theme }) => theme.colors.white};
     height: 45px;
     color: ${({ theme }) => theme.colors.white};

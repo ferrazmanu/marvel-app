@@ -26,11 +26,16 @@ export const Paginate = styled.div`
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 cursor: pointer;
+                color: ${({ theme }) => theme.colors.white};
             }
         }
 
         li.selected {
             background-color: ${({ theme }) => theme.colors.secondary};
+
+            a {
+                color: ${({ theme }) => theme.colors.white};
+            }
         }
     }
 `;

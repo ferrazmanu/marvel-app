@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as S from './styles';
 import { setTheme } from '../../redux/actions';
 import { selectTheme } from '../../redux/selectors';
 import { useThemeDetector } from '../../hooks/useThemeDetector';
+import { FC } from 'react';
 
-export const ThemeButton = () => {
+import * as S from './styles';
+
+export const DarkModeButton: FC = () => {
     const theme = useSelector(selectTheme);
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
