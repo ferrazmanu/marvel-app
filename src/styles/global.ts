@@ -29,6 +29,10 @@ const GlobalStyle = createGlobalStyle`
         border: none;
     }
 
+    button{
+      cursor: pointer;
+    }
+
    a{
     text-decoration: none;
     color: ${({ theme }) => theme.colors.white};

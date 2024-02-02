@@ -68,9 +68,4 @@ export const ButtonWrapper = styled.div`
         transition: 0.3s ease all;
         z-index: 1;
     }
-
-    @media only screen and (max-width: 375px) {
-        right: 10px;
-        left: unset;
-    }
 `;

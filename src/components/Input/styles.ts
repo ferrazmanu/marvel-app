@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
 
     button {
         display: flex;
-        cursor: pointer;
         position: absolute;
         right: 3px;
         top: 50%;

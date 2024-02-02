@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
     h3 {
         text-transform: unset;
         font-size: ${({ theme }) => theme.fontSizes.medium_24};
+        font-weight: bold;
     }
 
     p {
@@ -33,6 +34,6 @@ export const Wrapper = styled.div`
         background-position: center;
         background-size: cover;
         width: 100%;
-        height: 200px;
+        height: 300px;
     }
 `;

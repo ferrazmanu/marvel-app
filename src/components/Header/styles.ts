@@ -1,8 +1,34 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Header = styled.header`
+interface Props {
+    open?: boolean;
+}
+
+export const Header = styled.header<Props>`
     position: relative;
     z-index: 10;
+
+    button {
+        color: ${({ theme }) => theme.colors.white};
+        display: none;
+
+        svg {
+            display: flex;
+        }
+    }
+
+    @media only screen and (max-width: 800px) {
+        min-height: 40px;
+        display: flex;
+        justify-content: flex-end;
+        padding: 5px 10px;
+        align-items: center;
+
+        button {
+            display: flex;
+            align-self: flex-end;
+        }
+    }
 
     ul {
         display: flex;
@@ -12,6 +38,39 @@ export const Header = styled.header`
         max-width: 70dvw;
         width: 100%;
         margin: 0 auto;
+        transition: 0.3s ease-in-out;
+
+        ${(props) =>
+            props.open
+                ? css`
+                      transform: translateX(100%);
+                  `
+                : css`
+                      transform: translateX(0%);
+                  `}
+
+        @media only screen and (max-width: 800px) {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100dvh;
+            flex-direction: column;
+            max-width: 30%;
+            background: ${({ theme }) => theme.colors.background};
+            border-left: 3px solid ${({ theme }) => theme.colors.secondary};
+            align-items: flex-end;
+            text-align: right;
+            gap: 10px;
+        }
+
+        @media only screen and (max-width: 600px) {
+            max-width: 50%;
+        }
+
+        @media only screen and (max-width: 300px) {
+            max-width: 70%;
+            padding: 25px 20px;
+        }
 
         li {
             text-transform: uppercase;
