@@ -14,6 +14,7 @@ const theme: DefaultTheme = {
         medium_30: 'clamp(1.375rem, 30px, 1.875rem)',
         medium_24: 'clamp(1.063rem, 24px, 1.5rem)',
         small_18: 'clamp(0.813rem, 18px, 1.125rem)',
+        small_14: 'clamp(0.75rem, 14px, 0.875rem)',
         small_12: 'clamp(0.625rem, 12px, 0.75rem)',
     },
     spacing: {

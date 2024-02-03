@@ -10,22 +10,36 @@ import Loading from '../../components/Loading';
 import Paginate from '../../components/Paginate';
 import { MainWrapper } from '../../components/MainWrapper';
 import PageTitle from '../../components/PageTitle';
+import { FiltersProps } from '../../types/types';
+import { options } from './constants';
 
 const fetchComics = async (
     dispatch: Dispatch<UnknownAction>,
     pageNumber: number,
-    searchValue?: string
+    filters?: FiltersProps
 ) => {
     const limit = 20;
     const offset = pageNumber * limit;
 
+    let params;
+    if (filters?.selectedFilterType) {
+        params = {
+            offset: offset >= 0 ? offset : 0,
+            limit,
+            nameStartsWith: filters?.search || null,
+            [filters.selectedFilterType]: filters?.filtersIds,
+        };
+    } else {
+        params = {
+            offset: offset >= 0 ? offset : 0,
+            limit,
+            nameStartsWith: filters?.search || null,
+        };
+    }
+
     try {
         const response = await http.get('comics', {
-            params: {
-                offset: offset >= 0 ? offset : 0,
-                limit,
-                titleStartsWith: searchValue || null,
-            },
+            params,
         });
 
         if (response.status !== 200) {
@@ -65,7 +79,8 @@ const Comics: React.FC = () => {
             <Container fullheight>
                 <PageTitle
                     title="Quadrinhos"
-                    searchFunc={(value: string) => {
+                    filtertype={options}
+                    searchFunc={(value: FiltersProps) => {
                         setLoading(true);
                         fetchComics(dispatch, 0, value).then(() =>
                             setLoading(false)

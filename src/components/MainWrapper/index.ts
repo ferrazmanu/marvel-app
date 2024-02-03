@@ -4,6 +4,10 @@ export const MainWrapper = styled.main`
     /* altura minima removendo o tamanho do header e do footer */
     min-height: calc(100dvh - 121px);
 
+    @media only screen and (max-width: 800px) {
+        min-height: calc(100dvh - 50px);
+    }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));

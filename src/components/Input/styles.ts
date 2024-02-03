@@ -1,23 +1,31 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Wrapper = styled.div`
+interface Props {
+    disabled?: boolean;
+}
+
+export const Wrapper = styled.div<Props>`
     border-bottom: 1px solid ${({ theme }) => theme.colors.white};
-    padding: 0 8px;
+    padding-left: 8px;
     position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    ${(props) =>
+        props.disabled &&
+        css`
+            cursor: not-allowed;
+            opacity: 0.5;
+        `}
 
     button {
         display: flex;
-        position: absolute;
-        right: 3px;
-        top: 50%;
-        transform: translateY(-50%);
         color: ${({ theme }) => theme.colors.white};
     }
 
     input {
         height: 38px;
-        color: ${({ theme }) => theme.colors.white};
         width: 100%;
-        font-size: ${({ theme }) => theme.fontSizes.small_18};
     }
 `;

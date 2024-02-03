@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { getCookie, setCookie } from '../../utils/cookies';
-import { InputsProps } from '../../types/types';
+import { FormProps } from '../../types/types';
 import { FullContainer } from '../../components/Container';
 import { Wrapper } from './styles';
 import Button from '../../components/Button';
@@ -19,7 +19,7 @@ const Keys: React.FC = () => {
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm<InputsProps>({
+    } = useForm<FormProps>({
         defaultValues: {
             publicKey: getCookie('publicKey') || '',
             privateKey: getCookie('privateKey') || '',
@@ -30,7 +30,7 @@ const Keys: React.FC = () => {
     const isUserAuth = useSelector(selectAuth);
     const navigate = useNavigate();
 
-    const onSubmit: SubmitHandler<InputsProps> = async (data) => {
+    const onSubmit: SubmitHandler<FormProps> = (data) => {
         setLoading(true);
 
         try {

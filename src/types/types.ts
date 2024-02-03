@@ -129,7 +129,27 @@ export interface CreatorProps {
     };
 }
 
-export interface InputsProps {
+export interface FiltersProps {
+    filtersIds?: string[];
+    search?: string;
+    selectedFilterType?: string;
+}
+
+export interface OptionProps {
+    id: number;
+    value: string;
+    title?: string;
+    name?: string;
+    fullName?: string;
+    selected?: boolean;
+    parameter?: string;
+    default?: boolean;
+    originalIssue?: {
+        name: string;
+    };
+}
+
+export interface FormProps {
     publicKey: string;
     privateKey: string;
     [key: string]: unknown;

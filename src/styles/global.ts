@@ -23,10 +23,14 @@ const GlobalStyle = createGlobalStyle`
        min-height: 100dvh;
    }
 
-    input, button{
+    input, button, select, textarea{
         background-color: transparent;
         appearance: none;
+        -webkit-appearance: none;
         border: none;
+        color: ${({ theme }) => theme.colors.white};
+        font-size: ${({ theme }) => theme.fontSizes.small_14};
+
     }
 
     button{
