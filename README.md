@@ -37,3 +37,6 @@ npm install
 ## **Contribuição**
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas (issues) ou enviar solicitações de pull (pull requests) para melhorar este projeto.
+
+
+Obs.: Caso suas chaves inseridas sejam válidas e mesmo assim, as requisições de pesquisa estejam falhando, verificar a permissão de conteúdo não seguro do seu navegador nas configurações de privacidade e segurança. 
