@@ -22,18 +22,21 @@ const fetchComics = async (
     const offset = pageNumber * limit;
 
     let params;
-    if (filters?.selectedFilterType) {
+    if (
+        !filters?.selectedFilterType ||
+        filters?.selectedFilterType === 'comics'
+    ) {
         params = {
             offset: offset >= 0 ? offset : 0,
             limit,
-            nameStartsWith: filters?.search || null,
-            [filters.selectedFilterType]: filters?.filtersIds,
+            titleStartsWith: filters?.search || null,
         };
     } else {
         params = {
             offset: offset >= 0 ? offset : 0,
             limit,
-            nameStartsWith: filters?.search || null,
+            titleStartsWith: filters?.search || null,
+            [filters.selectedFilterType]: filters?.filtersIds,
         };
     }
 

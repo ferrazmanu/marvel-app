@@ -22,18 +22,21 @@ const fetchCharacters = async (
     const offset = pageNumber * limit;
 
     let params;
-    if (filters?.selectedFilterType) {
+    if (
+        !filters?.selectedFilterType ||
+        filters?.selectedFilterType === 'characters'
+    ) {
         params = {
             offset: offset >= 0 ? offset : 0,
             limit,
             nameStartsWith: filters?.search || null,
-            [filters.selectedFilterType]: filters?.filtersIds,
         };
     } else {
         params = {
             offset: offset >= 0 ? offset : 0,
             limit,
             nameStartsWith: filters?.search || null,
+            [filters.selectedFilterType]: filters?.filtersIds,
         };
     }
 
